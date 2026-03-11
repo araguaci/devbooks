@@ -62,6 +62,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production';
 app.use(cors({ origin: true }));
 app.use(express.json());
 
+// Health check sem DB — para validar que a função Netlify/Vercel está rodando
+app.get('/api/health', (req, res) => res.json({ ok: true }));
+
 app.use(async (req, res, next) => {
   try {
     req.db = await getDb();
@@ -315,8 +318,6 @@ app.get('/api/challenges/current', authMiddleware, async (req, res) => {
 
   res.json({ ...challenge, books_completed: updated.books_completed, completed: done });
 });
-
-app.get('/api/health', (req, res) => res.json({ ok: true }));
 
 const PORT = process.env.PORT || 3001;
 if (!process.env.VERCEL) {

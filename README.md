@@ -1,6 +1,3 @@
-[![Header](https://github.com/araguaci/devbooks/blob/main/.github/img/header.svg)](https://github.com/KAYOKG)
-
-<h2 align="center"> Sumário </h2>
 
 > 📋 **[Ranking de Prioridade](LivrosDev/RANKING.md)** — Ordem sugerida de leitura por impacto e carreira
 
