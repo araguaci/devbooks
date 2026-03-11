@@ -7,9 +7,16 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getDb } from './db.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const rankingPath = join(__dirname, 'data', 'ranking.json');
-const linksPath = join(__dirname, 'data', 'links.json');
+function getDataDir() {
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta.url) {
+      return join(dirname(fileURLToPath(import.meta.url)), 'data');
+    }
+  } catch {}
+  return join(process.cwd(), 'server', 'data');
+}
+const rankingPath = join(getDataDir(), 'ranking.json');
+const linksPath = join(getDataDir(), 'links.json');
 let rankingData = null;
 
 function getRanking() {

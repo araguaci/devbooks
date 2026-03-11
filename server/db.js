@@ -5,7 +5,15 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+function getDirname() {
+  try {
+    if (typeof import.meta !== 'undefined' && import.meta.url) {
+      return dirname(fileURLToPath(import.meta.url));
+    }
+  } catch {}
+  return process.cwd();
+}
+const __dirname = getDirname();
 const useTurso = !!process.env.TURSO_DATABASE_URL;
 const isServerless = !!(process.env.NETLIFY || process.env.VERCEL);
 

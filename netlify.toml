@@ -23,18 +23,5 @@
   force = false
 
 [functions]
-  node_bundler = "esbuild"
-  external_node_modules = [
-    "debug",
-    "express",
-    "serverless-http",
-    "@libsql/client",
-    "@libsql/core",
-    "@libsql/hrana-client",
-    "promise-limit",
-    "js-base64",
-    "bcryptjs",
-    "cors",
-    "jsonwebtoken",
-    "better-sqlite3"
-  ]
+  node_bundler = "none"
+  included_files = ["./server/data/*.json"]
