@@ -1,23 +1,21 @@
 # Links dos livros
 
-## Forma recomendada: raw do GitHub
-
-Configure a variável `GITHUB_RAW_BASE` no `.env`:
+Os links apontam para o raw do repositório `araguaci/devbooks`:
 
 ```
-GITHUB_RAW_BASE=https://raw.githubusercontent.com/araguaci/devbooks/main
+https://raw.githubusercontent.com/araguaci/devbooks/main/LivrosDev/{slug}.pdf
 ```
 
-Todos os 95+ livros terão link automático para `LivrosDev/{slug}.pdf` — sem editar nada manualmente.
+## Regenerar links
 
-## Override com links.json
+Ao adicionar livros em `books.json`, rode:
 
-Para livros com URL diferente (ex: link externo, outro host), adicione em `links.json`:
-
-```json
-{
-  "slug-do-livro": "https://url-alternativa.com/livro.pdf"
-}
+```bash
+cd server && npm run generate-links
 ```
 
-O `links.json` tem prioridade sobre o GitHub raw.
+Isso atualiza `links.json` com as URLs raw para todos os livros.
+
+## Override
+
+Para um livro com URL diferente (ex: link externo), edite `links.json` manualmente. O script `generate-links` sobrescreve o arquivo — faça backup de overrides antes de rodar.

@@ -8,7 +8,8 @@
     "dev:kill": "npx --yes kill-port 3001 5173",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
-    "setup": "cd server && npm install && npm run seed && cd ../client && npm install"
+    "setup": "cd server && npm install && npm run seed && cd ../client && npm install",
+    "deploy": "cd .. && vercel --prod"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"
