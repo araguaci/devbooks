@@ -1,0 +1,39 @@
+# DevBooks — Netlify
+# https://edevbooks.netlify.app
+
+[build]
+  command = "npm run build"
+  publish = "client/dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = true
+
+# SPA fallback — rotas não encontradas vão para index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = [
+    "express",
+    "serverless-http",
+    "@libsql/client",
+    "@libsql/core",
+    "@libsql/hrana-client",
+    "promise-limit",
+    "js-base64",
+    "bcryptjs",
+    "cors",
+    "jsonwebtoken",
+    "better-sqlite3"
+  ]

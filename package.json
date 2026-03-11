@@ -7,7 +7,8 @@
     "dev": "concurrently -n server,client -c cyan,orange \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
-    "deploy": "vercel --prod",
+    "deploy": "netlify deploy --prod",
+    "deploy:vercel": "vercel --prod",
     "seed": "cd server && npm run seed"
   },
   "devDependencies": {
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",
+    "serverless-http": "^3.2.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.21.1",

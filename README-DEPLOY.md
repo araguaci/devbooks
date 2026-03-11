@@ -1,16 +1,18 @@
-# DevBooks — Estrutura para Vercel
+# DevBooks — Deploy
+
+**Produção:** https://edevbooks.netlify.app
 
 ## Estrutura do projeto
 
 ```
 BibliotecaDev/
-├── client/          # React + Vite (frontend)
-├── server/          # Express + SQLite/Turso (API)
-├── api/             # (legado, não usado)
-├── server.js        # Entry point Vercel — SPA + API
-├── vercel.json
-├── package.json
-└── docs/
+├── client/              # React + Vite (frontend)
+├── server/               # Express + SQLite/Turso (API)
+├── netlify/functions/    # Netlify Function (API)
+├── server.js             # Entry point Vercel (legado)
+├── netlify.toml          # Config Netlify
+├── vercel.json           # Config Vercel (legado)
+└── package.json
 ```
 
 ## Desenvolvimento
@@ -28,9 +30,11 @@ npm run dev
 
 Acesse http://localhost:5173. O frontend faz proxy de `/api` para o backend (porta 3001).
 
-## Deploy (Vercel)
+## Deploy
 
-Ver [docs/VERCEL-SETUP.md](docs/VERCEL-SETUP.md) para:
+**Netlify (atual):** [docs/NETLIFY.md](docs/NETLIFY.md)
+
+**Vercel (legado):** [docs/VERCEL-SETUP.md](docs/VERCEL-SETUP.md) para:
 - Excluir projeto e criar novamente
 - **Build Command**, **Output Directory**, **Install Command**
 - Variáveis de ambiente

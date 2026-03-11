@@ -39,3 +39,7 @@ pnpm-debug.log*
 LivrosDev - Kindle/
 README (Sem Pirataria).md
 .vercel
+.env*.local
+
+# Local Netlify folder
+.netlify
