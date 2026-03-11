@@ -2,5 +2,11 @@
   "version": 2,
   "buildCommand": "npm run build",
   "installCommand": "npm install && cd dashboard/client && npm install",
-  "framework": null
+  "framework": null,
+  "builds": [
+    { "src": "server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/server.js" }
+  ]
 }
