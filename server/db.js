@@ -7,11 +7,19 @@ import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const useTurso = !!process.env.TURSO_DATABASE_URL;
+const isServerless = !!(process.env.NETLIFY || process.env.VERCEL);
 
 let _db = null;
 
 async function getDb() {
   if (_db) return _db;
+
+  if (isServerless && !useTurso) {
+    throw new Error(
+      'TURSO_DATABASE_URL e TURSO_AUTH_TOKEN devem estar configurados em produção (Netlify/Vercel). ' +
+      'Configure em Site settings → Environment variables.'
+    );
+  }
 
   if (useTurso) {
     const { createClient } = await import('@libsql/client');

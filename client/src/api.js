@@ -13,14 +13,26 @@ function headers(includeAuth = false) {
   return h;
 }
 
+async function parseJsonOrEmpty(res) {
+  const text = await res.text();
+  try {
+    return text ? JSON.parse(text) : {};
+  } catch {
+    return {};
+  }
+}
+
 export async function register(email, password, displayName) {
   const res = await fetch(`${API}/auth/register`, {
     method: 'POST',
     headers: headers(),
     body: JSON.stringify({ email, password, displayName: displayName || null }),
   });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || 'Erro ao cadastrar');
+  const data = await parseJsonOrEmpty(res);
+  if (!res.ok) {
+    const msg = data?.error || (res.status >= 500 ? 'Servidor indisponível. Tente novamente.' : 'Erro ao cadastrar');
+    throw new Error(msg);
+  }
   return data;
 }
 
@@ -30,8 +42,11 @@ export async function login(email, password) {
     headers: headers(),
     body: JSON.stringify({ email, password }),
   });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || 'Erro ao fazer login');
+  const data = await parseJsonOrEmpty(res);
+  if (!res.ok) {
+    const msg = data?.error || (res.status >= 500 ? 'Servidor indisponível. Tente novamente.' : 'Erro ao fazer login');
+    throw new Error(msg);
+  }
   return data;
 }
 

@@ -103,3 +103,9 @@ Se `vercel --prod` falhar, tente conectar o repo na Vercel e fazer push. O deplo
 
 ### 5. Node.js
 Em **Settings** → **General** → **Node.js Version**, use **20.x** ou **22.x**.
+
+### 6. 502 / Servidor indisponível em /api/auth/*
+Se cadastro ou login retornam 502:
+- Configure `TURSO_DATABASE_URL` e `TURSO_AUTH_TOKEN` em **Settings** → **Environment Variables**
+- Aplique em Production e Preview
+- Faça um novo deploy após alterar variáveis

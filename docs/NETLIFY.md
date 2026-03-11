@@ -26,6 +26,8 @@ Em **Site settings** → **Environment variables**:
 
 Ver [TURSO.md](TURSO.md) para obter `TURSO_DATABASE_URL` e `TURSO_AUTH_TOKEN`.
 
+**Importante:** Sem essas variáveis, a API retorna 502/503. Configure antes do deploy.
+
 ## Deploy
 
 ```bash
@@ -40,3 +42,11 @@ Ou conecte o repositório Git para deploy automático.
 - **Static:** `client/dist` (React/Vite)
 - **API:** `netlify/functions/server.js` (Express via serverless-http)
 - **Redirects:** `/api/*` → function, `/*` → SPA fallback
+
+## Troubleshooting: 502 / Servidor indisponível
+
+Se `/api/auth/register` ou `/api/auth/login` retornam 502:
+
+1. **Verifique as variáveis de ambiente** — `TURSO_DATABASE_URL` e `TURSO_AUTH_TOKEN` devem estar em **Site settings** → **Environment variables** (All scopes).
+2. **Redeploy** — Após adicionar/alterar variáveis, faça um novo deploy (Deploys → Trigger deploy).
+3. **Logs** — Em **Functions** → **server** → **Logs**, confira erros como "TURSO_DATABASE_URL deve estar configurado".

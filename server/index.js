@@ -63,8 +63,17 @@ app.use(cors({ origin: true }));
 app.use(express.json());
 
 app.use(async (req, res, next) => {
-  req.db = await getDb();
-  next();
+  try {
+    req.db = await getDb();
+    next();
+  } catch (e) {
+    console.error('[DB]', e.message);
+    res.status(503).json({
+      error: process.env.NETLIFY || process.env.VERCEL
+        ? 'Banco de dados não configurado. Configure TURSO_DATABASE_URL e TURSO_AUTH_TOKEN nas variáveis de ambiente.'
+        : e.message,
+    });
+  }
 });
 
 function authMiddleware(req, res, next) {
