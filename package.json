@@ -3,10 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "cd dashboard/client && npm ci && npm run build",
-    "dev": "cd dashboard && npm run dev",
+    "build": "cd client && npm ci && npm run build",
+    "dev": "concurrently -n server,client -c cyan,orange \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
     "deploy": "vercel --prod",
-    "seed": "cd dashboard/server && npm run seed"
+    "seed": "cd server && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",

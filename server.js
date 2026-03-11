@@ -5,10 +5,10 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import app from './dashboard/server/index.js';
+import app from './server/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const distPath = path.join(__dirname, 'dashboard/client/dist');
+const distPath = path.join(__dirname, 'client/dist');
 
 // SPA: arquivos estáticos e fallback para index.html (após rotas /api)
 app.use(express.static(distPath));

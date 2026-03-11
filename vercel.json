@@ -1,10 +1,19 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "installCommand": "npm install && cd dashboard/client && npm install",
+  "installCommand": "npm install && cd client && npm install",
   "framework": null,
   "builds": [
-    { "src": "server.js", "use": "@vercel/node" }
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "client/dist"
+      }
+    },
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/server.js" }

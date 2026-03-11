@@ -62,7 +62,7 @@ Use esse valor como `TURSO_AUTH_TOKEN`.
 
 ### Local (desenvolvimento)
 
-Crie ou edite `dashboard/server/.env`:
+Crie ou edite `server/.env`:
 
 ```env
 TURSO_DATABASE_URL=libsql://devbooks-xxx.turso.io
@@ -80,14 +80,14 @@ TURSO_DATABASE_URL=... TURSO_AUTH_TOKEN=... npm run seed
 Após configurar as variáveis, rode o seed contra o Turso:
 
 ```bash
-cd dashboard/server
+cd server
 TURSO_DATABASE_URL=libsql://devbooks-xxx.turso.io TURSO_AUTH_TOKEN=eyJ... npm run seed
 ```
 
 Ou, se o `.env` já estiver configurado:
 
 ```bash
-cd dashboard/server
+cd server
 npm run seed
 ```
 
