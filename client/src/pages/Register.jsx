@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../context/AuthContext';
-import { register } from '../api';
+import { register, loginWithGoogle } from '../api';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -18,6 +19,21 @@ export default function Register() {
     setLoading(true);
     try {
       const data = await register(email, password, displayName);
+      authLogin(data);
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    if (!credentialResponse?.credential) return;
+    setError('');
+    setLoading(true);
+    try {
+      const data = await loginWithGoogle(credentialResponse.credential);
       authLogin(data);
       navigate('/');
     } catch (err) {
@@ -74,6 +90,24 @@ export default function Register() {
             {loading ? 'Cadastrando...' : 'Cadastrar'}
           </button>
         </form>
+        {import.meta.env.VITE_GOOGLE_CLIENT_ID && (
+          <>
+            <div className="auth-divider">
+              <span>ou continue com</span>
+            </div>
+            <div className="auth-google">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={() => setError('Erro ao fazer login com Google')}
+                useOneTap={false}
+                theme="filled_black"
+                size="large"
+                text="continue_with"
+                shape="rectangular"
+              />
+            </div>
+          </>
+        )}
         <p className="auth-footer">
           Já tem conta? <Link to="/login">Entrar</Link>
         </p>

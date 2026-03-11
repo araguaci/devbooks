@@ -36,6 +36,20 @@ export async function register(email, password, displayName) {
   return data;
 }
 
+export async function loginWithGoogle(credential) {
+  const res = await fetch(`${API}/auth/google`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ credential }),
+  });
+  const data = await parseJsonOrEmpty(res);
+  if (!res.ok) {
+    const msg = data?.error || (res.status >= 500 ? 'Servidor indisponível. Tente novamente.' : 'Erro ao fazer login com Google');
+    throw new Error(msg);
+  }
+  return data;
+}
+
 export async function login(email, password) {
   const res = await fetch(`${API}/auth/login`, {
     method: 'POST',

@@ -1,0 +1,1337 @@
+🔍 Documentando Infraestrutura - 2026-03-11 20:56:08
+==========================================
+
+
+==========================================
+📊 INFORMAÇÕES DO SISTEMA
+==========================================
+
+Hostname: srv1114865
+Sistema Operacional: Linux srv1114865 6.8.0-90-generic #91-Ubuntu SMP PREEMPT_DYNAMIC Tue Nov 18 14:14:30 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+Docker Version: Docker version 28.2.2, build 28.2.2-0ubuntu1~24.04.1
+Docker Compose Version: docker-compose version 1.29.2, build unknown
+
+
+==========================================
+🐳 CONTAINERS DOCKER - STATUS GERAL
+==========================================
+
+NAMES                       STATUS                   IMAGE                                  PORTS
+zero_backend                Up 13 days               zero-backend                           0.0.0.0:8787->8787/tcp, [::]:8787->8787/tcp
+zero_app                    Up 13 days (healthy)     zero-zero                              0.0.0.0:3002->3000/tcp, [::]:3002->3000/tcp
+zero_valkey                 Up 2 weeks (healthy)     bitnami/valkey:latest                  0.0.0.0:6380->6379/tcp, [::]:6380->6379/tcp
+zero_upstash_proxy          Up 2 weeks (healthy)     hiett/serverless-redis-http:latest     0.0.0.0:8079->80/tcp, [::]:8079->80/tcp
+zero_migrations             Exited (0) 13 days ago   zero-migrations                        
+saude_livre_backend         Up 3 weeks               saude-livre_backend                    0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp
+saude_livre_frontend        Up 3 weeks               saude-livre_frontend                   0.0.0.0:5174->80/tcp, [::]:5174->80/tcp
+evolution_frontend          Up 4 weeks               evoapicloud/evolution-manager:latest   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp
+evolution_api               Up 4 weeks               evoapicloud/evolution-api:latest       0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp
+moltbot-moltbot-gateway-1   Exited (0) 5 weeks ago   moltbot:local                          
+orcamento_nginx             Up 3 weeks (healthy)     nginx:alpine                           0.0.0.0:8080->80/tcp, [::]:8080->80/tcp, 0.0.0.0:8443->443/tcp, [::]:8443->443/tcp
+orcamento_app               Up 3 weeks (healthy)     orcamento-app                          9000/tcp
+orcamento_db                Up 5 weeks               mysql:8.0                              0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp
+orcamento_redis             Up 5 weeks               redis:alpine                           0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
+n8n                         Up 5 weeks               docker.n8n.io/n8nio/n8n                0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+community_app_1             Up 5 weeks               debian:latest                          0.0.0.0:5001->5001/tcp, [::]:5001->5001/tcp
+minio                       Up 5 weeks               minio/minio:latest                     0.0.0.0:8760->9000/tcp, [::]:8760->9000/tcp, 0.0.0.0:8761->9090/tcp, [::]:8761->9090/tcp
+dozzle-dozzle-1             Exited (0) 5 weeks ago   amir20/dozzle:latest                   
+homarr                      Up 5 weeks               ghcr.io/homarr-labs/homarr:latest      0.0.0.0:7575->7575/tcp, [::]:7575->7575/tcp
+networking-toolbox          Exited (0) 5 weeks ago   lissy93/networking-toolbox:latest      
+omnichannel_nginx           Exited (0) 4 weeks ago   nginx:alpine                           
+omnichannel_app             Up 5 weeks               omnichannel-system_app                 9000/tcp
+omnichannel_queue           Up 42 minutes            omnichannel-system_queue               9000/tcp
+omnichannel_redis           Up 5 weeks               redis:alpine                           6379/tcp
+omnichannel_db              Up 5 weeks               mysql:8.0                              3306/tcp, 33060/tcp
+postgres                    Up 5 weeks               postgres:16                            0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+orcamento_queue             Up 5 weeks               orcamento_queue                        9000/tcp
+lotofacil-neural-app        Up 5 weeks (healthy)     lotofacil-neural_lotofacil-app         0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
+portainer                   Up 5 weeks               portainer/portainer-ce:latest          0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp, 0.0.0.0:9443->9443/tcp, [::]:9443->9443/tcp, 9000/tcp
+
+
+==========================================
+🔵 CONTAINERS OMNICHANNEL - DETALHES
+==========================================
+
+--- omnichannel_nginx ---
+Status: exited
+Image: nginx:alpine
+IP: 
+Restart Policy: unless-stopped
+
+--- omnichannel_app ---
+Status: running
+Image: omnichannel-system_app
+IP: 172.22.0.6
+Restart Policy: unless-stopped
+
+--- omnichannel_db ---
+Status: running
+Image: mysql:8.0
+IP: 172.22.0.4
+Restart Policy: unless-stopped
+
+--- omnichannel_redis ---
+Status: running
+Image: redis:alpine
+IP: 172.22.0.3
+Restart Policy: unless-stopped
+
+--- omnichannel_queue ---
+Status: running
+Image: omnichannel-system_queue
+IP: 172.22.0.2
+Restart Policy: unless-stopped
+
+
+==========================================
+🌐 NETWORKS DOCKER
+==========================================
+
+NETWORK ID     NAME                                     DRIVER    SCOPE
+c41bac3e1450   bridge                                   bridge    local
+bf647812bd66   clawdbot-docker_default                  bridge    local
+d05adf02c1db   dokploy-network                          bridge    local
+11eaec3ac0eb   dozzle_default                           bridge    local
+5d28afa7deae   evolution-net                            bridge    local
+3d1fdcca6f12   homarr-1_default                         bridge    local
+379e0dd0b195   homarr_default                           bridge    local
+30e466ec8671   host                                     host      local
+05b0bc794ae5   kaneo-network                            bridge    local
+1d3d15199d1e   lotofacil-neural_lotofacil-network       bridge    local
+9192a1562763   moltbot_default                          bridge    local
+ae499d6a5443   none                                     null      local
+7993a5e78df9   omnichannel-system_omnichannel_network   bridge    local
+a36b2620dc9a   orcamento_default                        bridge    local
+1d74522c15fa   orcamento_orcamento_network              bridge    local
+8d0dfa189f5f   postgresql_default                       bridge    local
+1fe5b2b90f67   saude-livre_saude_livre_network          bridge    local
+bf570e1ee311   saude_livre_network                      bridge    local
+a5d53157baaa   supabase_default                         bridge    local
+645fd251a2cc   wppconnect-server_default                bridge    local
+fd70d6158da2   zero_zero_network                        bridge    local
+
+--- Detalhes da Network: omnichannel-system_omnichannel_network ---
+omnichannel_app (172.22.0.6/16)
+omnichannel_db (172.22.0.4/16)
+omnichannel_redis (172.22.0.3/16)
+omnichannel_queue (172.22.0.2/16)
+
+
+
+==========================================
+💾 VOLUMES E MOUNTS
+==========================================
+
+--- omnichannel_nginx ---
+bind /etc/letsencrypt -> /etc/letsencrypt (ro)
+bind /var/www/omnichannel/omnichannel-system/docker/nginx/default.conf -> /etc/nginx/conf.d/default.conf (rw)
+bind /var/www/omnichannel/omnichannel-system/docker/nginx/ssl -> /etc/nginx/ssl (rw)
+bind /var/www/omnichannel/omnichannel-system -> /var/www/html (rw)
+
+
+--- omnichannel_app ---
+bind /var/www/omnichannel/omnichannel-system -> /var/www/html (rw)
+bind /var/www/omnichannel/omnichannel-system/docker/php/local.ini -> /usr/local/etc/php/conf.d/local.ini (rw)
+
+
+--- orcamento_nginx ---
+bind /root/orcamento/docker/nginx/default.conf -> /etc/nginx/conf.d/default.conf (rw)
+bind /root/orcamento/docker/nginx/ssl -> /etc/nginx/ssl (rw)
+bind /etc/letsencrypt -> /etc/letsencrypt (ro)
+bind /root/orcamento -> /var/www/html (rw)
+
+
+
+==========================================
+⚙️ VALIDAÇÃO NGINX - HOST VS CONTAINERS
+==========================================
+
+--- Nginx no Host ---
+✅ Nginx instalado no host: 1.24.0 (Ubuntu)
+⚠️  Nginx do host está RODANDO
+   Isso pode causar conflito de portas com containers!
+   Portas em uso pelo Nginx do host:
+   0.0.0.0:80
+   0.0.0.0:443
+   :::80
+   :::443
+   Configuração: /etc/nginx/nginx.conf
+   ✅ Configuração válida
+
+--- Containers Nginx ---
+--- orcamento_nginx ---
+  Status: running
+  Portas expostas: 80/tcp -> 0.0.0.0:8080
+80/tcp -> [::]:8080
+443/tcp -> 0.0.0.0:8443
+443/tcp -> [::]:8443
+  Networks: orcamento_orcamento_network 
+  ✅ Configuração válida
+  Portas escutando: 80
+443
+
+--- Verificação de Conflitos de Portas ---
+⚠️  Múltiplos serviços escutando na porta 80:
+   3984492/nginx: -> 0.0.0.0:80
+   3984492/nginx: -> :::80
+⚠️  Múltiplos serviços escutando na porta 443:
+   3984492/nginx: -> 0.0.0.0:443
+   3984492/nginx: -> :::443
+
+
+==========================================
+🔍 PROXY REVERSO - LOCALIZAÇÃO
+==========================================
+
+--- Portas 80 e 443 - Quem está escutando? ---
+
+Porta 80:
+  LISTEN 0      511          0.0.0.0:80         0.0.0.0:*    users:(("nginx",pid=4054658,fd=9),("nginx",pid=4054656,fd=9),("nginx",pid=4054655,fd=9),("nginx",pid=4054654,fd=9),("nginx",pid=3984492,fd=9))     
+  LISTEN 0      511             [::]:80            [::]:*    users:(("nginx",pid=4054658,fd=10),("nginx",pid=4054656,fd=10),("nginx",pid=4054655,fd=10),("nginx",pid=4054654,fd=10),("nginx",pid=3984492,fd=10))
+
+Porta 443:
+  LISTEN 0      511          0.0.0.0:443        0.0.0.0:*    users:(("nginx",pid=4054658,fd=11),("nginx",pid=4054656,fd=11),("nginx",pid=4054655,fd=11),("nginx",pid=4054654,fd=11),("nginx",pid=3984492,fd=11))
+  LISTEN 0      511             [::]:443           [::]:*    users:(("nginx",pid=4054658,fd=12),("nginx",pid=4054656,fd=12),("nginx",pid=4054655,fd=12),("nginx",pid=4054654,fd=12),("nginx",pid=3984492,fd=12))
+
+--- Nginx no HOST ---
+Binário: /usr/sbin/nginx
+nginx version: nginx/1.24.0 (Ubuntu)
+Config: /etc/nginx/nginx.conf
+Includes: include /etc/nginx/modules-enabled/*.conf;
+	include /etc/nginx/mime.types;
+	include /etc/nginx/conf.d/*.conf;
+	include /etc/nginx/sites-enabled/*;
+  /etc/nginx/conf.d: 0 arquivo(s)
+  /etc/nginx/sites-enabled: 2 arquivo(s)
+  /etc/nginx/sites-available: 2 arquivo(s)
+
+--- Containers Docker com Nginx ---
+orcamento_nginx             nginx:alpine                           Up 3 weeks (healthy)     0.0.0.0:8080->80/tcp, [::]:8080->80/tcp, 0.0.0.0:8443->443/tcp, [::]:8443->443/tcp
+omnichannel_nginx           nginx:alpine                           Exited (0) 4 weeks ago   
+
+Containers com portas 80/443 mapeadas:
+  zero_valkey 0.0.0.0:6380->6379/tcp, [::]:6380->6379/tcp
+  zero_upstash_proxy 0.0.0.0:8079->80/tcp, [::]:8079->80/tcp
+  saude_livre_frontend 0.0.0.0:5174->80/tcp, [::]:5174->80/tcp
+  evolution_frontend 0.0.0.0:3000->80/tcp, [::]:3000->80/tcp
+  evolution_api 0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp
+  orcamento_nginx 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp, 0.0.0.0:8443->443/tcp, [::]:8443->443/tcp
+  portainer 0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp, 0.0.0.0:9443->9443/tcp, [::]:9443->9443/tcp, 9000/tcp
+
+--- Outros proxies no host (Apache, Caddy, Traefik) ---
+
+--- Resumo - Comandos para inspecionar config ---
+  Nginx host:     sudo cat /etc/nginx/nginx.conf
+  Nginx conf.d:   sudo ls -la /etc/nginx/conf.d/
+  Container:      docker exec <container> cat /etc/nginx/conf.d/default.conf
+
+
+==========================================
+⚙️ CONFIGURAÇÕES NGINX DETALHADAS
+==========================================
+
+--- orcamento_nginx ---
+# configuration file /etc/nginx/nginx.conf:
+
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+}
+
+# configuration file /etc/nginx/mime.types:
+
+types {
+    text/html                                        html htm shtml;
+    text/css                                         css;
+    text/xml                                         xml;
+    image/gif                                        gif;
+    image/jpeg                                       jpeg jpg;
+    application/javascript                           js;
+    application/atom+xml                             atom;
+    application/rss+xml                              rss;
+
+    text/mathml                                      mml;
+    text/plain                                       txt;
+    text/vnd.sun.j2me.app-descriptor                 jad;
+    text/vnd.wap.wml                                 wml;
+    text/x-component                                 htc;
+
+    image/avif                                       avif;
+    image/png                                        png;
+    image/svg+xml                                    svg svgz;
+    image/tiff                                       tif tiff;
+    image/vnd.wap.wbmp                               wbmp;
+    image/webp                                       webp;
+    image/x-icon                                     ico;
+    image/x-jng                                      jng;
+    image/x-ms-bmp                                   bmp;
+
+    font/woff                                        woff;
+    font/woff2                                       woff2;
+
+    application/java-archive                         jar war ear;
+    application/json                                 json;
+    application/mac-binhex40                         hqx;
+    application/msword                               doc;
+    application/pdf                                  pdf;
+    application/postscript                           ps eps ai;
+    application/rtf                                  rtf;
+    application/vnd.apple.mpegurl                    m3u8;
+    application/vnd.google-earth.kml+xml             kml;
+    application/vnd.google-earth.kmz                 kmz;
+    application/vnd.ms-excel                         xls;
+    application/vnd.ms-fontobject                    eot;
+    application/vnd.ms-powerpoint                    ppt;
+    application/vnd.oasis.opendocument.graphics      odg;
+    application/vnd.oasis.opendocument.presentation  odp;
+    application/vnd.oasis.opendocument.spreadsheet   ods;
+    application/vnd.oasis.opendocument.text          odt;
+    application/vnd.openxmlformats-officedocument.presentationml.presentation
+                                                     pptx;
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                                                     xlsx;
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                                                     docx;
+    application/vnd.wap.wmlc                         wmlc;
+    application/wasm                                 wasm;
+    application/x-7z-compressed                      7z;
+    application/x-cocoa                              cco;
+    application/x-java-archive-diff                  jardiff;
+    application/x-java-jnlp-file                     jnlp;
+    application/x-makeself                           run;
+    application/x-perl                               pl pm;
+    application/x-pilot                              prc pdb;
+    application/x-rar-compressed                     rar;
+    application/x-redhat-package-manager             rpm;
+    application/x-sea                                sea;
+    application/x-shockwave-flash                    swf;
+    application/x-stuffit                            sit;
+    application/x-tcl                                tcl tk;
+    application/x-x509-ca-cert                       der pem crt;
+    application/x-xpinstall                          xpi;
+    application/xhtml+xml                            xhtml;
+    application/xspf+xml                             xspf;
+    application/zip                                  zip;
+
+    application/octet-stream                         bin exe dll;
+    application/octet-stream                         deb;
+    application/octet-stream                         dmg;
+    application/octet-stream                         iso img;
+    application/octet-stream                         msi msp msm;
+
+    audio/midi                                       mid midi kar;
+    audio/mpeg                                       mp3;
+    audio/ogg                                        ogg;
+    audio/x-m4a                                      m4a;
+    audio/x-realaudio                                ra;
+
+    video/3gpp                                       3gpp 3gp;
+    video/mp2t                                       ts;
+    video/mp4                                        mp4;
+    video/mpeg                                       mpeg mpg;
+    video/quicktime                                  mov;
+    video/webm                                       webm;
+    video/x-flv                                      flv;
+    video/x-m4v                                      m4v;
+    video/x-mng                                      mng;
+    video/x-ms-asf                                   asx asf;
+    video/x-ms-wmv                                   wmv;
+    video/x-msvideo                                  avi;
+}
+
+# configuration file /etc/nginx/conf.d/default.conf:
+# ============================================
+# NGINX ÚNICO - Portas 80 e 443 atendem todos os apps
+# ============================================
+# Este arquivo é o ponto único de entrada: todas as requisições em 80/443
+# são atendidas aqui; o server_name (Host) define qual app responde.
+#
+# Apps (80 → redirect HTTPS | 443 → app):
+#   1. Orçamento     orcamento.artesdosul.com     Laravel (PHP-FPM local)
+#   2. Omnichannel   lorentz.orbitall.net.br     proxy → omnichannel_nginx
+#   3. Saúde Livre   saudelivre.artesdosul.com    proxy → saude_livre_frontend
+#   4. Saúde Livre   api.saudelivre.artesdosul.com proxy → saude_livre_backend
+#   5. Evolution API evolution.artesdosul.com     proxy → evolution_frontend:80 (Manager) e /api/ → evolution_api:8080
+#
+# Upstreams em variáveis (resolver em tempo de requisição) para o nginx
+# subir mesmo quando os outros stacks não estão rodando.
+# ============================================
+
+resolver 127.0.0.11 valid=10s;
+
+# ============================================
+# 5. EVOLUTION API - evolution.artesdosul.com
+# ============================================
+
+# HTTP - Redirecionar para HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name evolution.artesdosul.com;
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/html/certbot;
+        allow all;
+    }
+
+    # Redirecionar para HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS - Evolution Manager + API (Proxy Reverso)
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name evolution.artesdosul.com;
+
+    # Certificados SSL
+    ssl_certificate /etc/letsencrypt/live/evolution.artesdosul.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/evolution.artesdosul.com/privkey.pem;
+
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Headers de Segurança
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # Logs
+    access_log /var/log/nginx/evolution_access.log;
+    error_log /var/log/nginx/evolution_error.log;
+
+    # Upload máximo
+    client_max_body_size 50M;
+
+    # Proxy Reverso para API (variável = resolve em tempo de requisição)
+    # Proxy Reverso para API
+    location /api/ {
+        rewrite ^/api/(.*) /$1 break;
+        proxy_pass http://evolution_api:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    # Proxy Reverso para Manager/Frontend (variável = resolve em tempo de requisição)
+    location / {
+        set $upstream_evolution_frontend "http://evolution_frontend:80";
+        proxy_pass $upstream_evolution_frontend;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/html/certbot;
+        allow all;
+    }
+}
+
+# ============================================
+# 1. ORÇAMENTO - orcamento.artesdosul.com
+# ============================================
+
+# HTTP - Redirecionar para HTTPS (exceto quando atrás de proxy com X-Forwarded-Proto: https)
+server {
+    listen 80;
+    listen [::]:80;
+    server_name orcamento.artesdosul.com;
+
+    # Quando o nginx da VPS faz proxy (X-Forwarded-Proto: https), servir o app em vez de redirecionar
+    if ($http_x_forwarded_proto != "https") {
+        return 301 https://$server_name$request_uri;
+    }
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+
+    # Mesmo conteúdo do bloco HTTPS (proxy da VPS envia HTTP na 8080)
+    root /var/www/html/public;
+    index index.php;
+    charset utf-8;
+
+    access_log /var/log/nginx/orcamento_access.log;
+    error_log /var/log/nginx/orcamento_error.log;
+
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_types text/plain text/css text/xml text/javascript application/json application/javascript application/xml+rss application/rss+xml font/truetype font/opentype application/vnd.ms-fontobject image/svg+xml;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    location = /manifest.json {
+        add_header Cache-Control "public, max-age=3600";
+        access_log off;
+    }
+
+    location = /service-worker.js {
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+        add_header Service-Worker-Allowed "/";
+        access_log off;
+    }
+
+    location /icons/ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass orcamento_app:9000;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_hide_header X-Powered-By;
+        fastcgi_read_timeout 300;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    client_max_body_size 20M;
+}
+
+# HTTPS - Orcamento
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name orcamento.artesdosul.com;
+
+    # Certificados SSL
+    ssl_certificate /etc/nginx/ssl/cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/key.pem;
+
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Headers de Segurança
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    root /var/www/html/public;
+    index index.php;
+    charset utf-8;
+
+    # Logs
+    access_log /var/log/nginx/orcamento_access.log;
+    error_log /var/log/nginx/orcamento_error.log;
+
+    # Gzip
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_types text/plain text/css text/xml text/javascript application/json application/javascript application/xml+rss application/rss+xml font/truetype font/opentype application/vnd.ms-fontobject image/svg+xml;
+
+    # Laravel - Orcamento
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    # PWA Support
+    location = /manifest.json {
+        add_header Cache-Control "public, max-age=3600";
+        access_log off;
+    }
+
+    location = /service-worker.js {
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+        add_header Service-Worker-Allowed "/";
+        access_log off;
+    }
+
+    location /icons/ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    error_page 404 /index.php;
+
+    # PHP-FPM - IMPORTANTE: usar orcamento_app
+    location ~ \.php$ {
+        fastcgi_pass orcamento_app:9000;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_hide_header X-Powered-By;
+        fastcgi_read_timeout 300;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    # Upload max size
+    client_max_body_size 20M;
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+}
+
+# ============================================
+# 2. OMNICHANNEL - lorentz.orbitall.net.br
+# ============================================
+
+# HTTP - Redirecionar para HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name lorentz.orbitall.net.br;
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+
+    # Redirecionar para HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS - Omnichannel (Proxy Reverso)
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name lorentz.orbitall.net.br;
+
+    # Certificados SSL
+    ssl_certificate /etc/letsencrypt/live/lorentz.orbitall.net.br/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/lorentz.orbitall.net.br/privkey.pem;
+
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Headers de Segurança
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # Logs
+    access_log /var/log/nginx/lorentz_access.log;
+    error_log /var/log/nginx/lorentz_error.log;
+
+    # Upload máximo
+    client_max_body_size 50M;
+
+    # Proxy Reverso para Omnichannel (variável = resolve em tempo de requisição)
+    location / {
+        set $upstream_omnichannel "http://omnichannel_nginx:80";
+        proxy_pass $upstream_omnichannel;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    # WebSocket support (se necessário)
+    location /ws {
+        set $upstream_omnichannel "http://omnichannel_nginx:80";
+        proxy_pass $upstream_omnichannel;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+}
+
+# ============================================
+# 3. SAÚDE LIVRE - saudelivre.artesdosul.com
+# ============================================
+
+# HTTP - Redirecionar para HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name saudelivre.artesdosul.com;
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+
+    # Redirecionar para HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS - Frontend (Proxy Reverso)
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name saudelivre.artesdosul.com;
+
+    # Certificados SSL
+    ssl_certificate /etc/letsencrypt/live/saudelivre.artesdosul.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/saudelivre.artesdosul.com/privkey.pem;
+
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Headers de Segurança
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # Logs
+    access_log /var/log/nginx/saudelivre_access.log;
+    error_log /var/log/nginx/saudelivre_error.log;
+
+    # Upload máximo
+    client_max_body_size 50M;
+
+    # Proxy Reverso para Frontend (variável = resolve em tempo de requisição)
+    location / {
+        set $upstream_saudelivre "http://saude_livre_frontend:80";
+        proxy_pass $upstream_saudelivre;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;  # CRÍTICO: passar o Host correto
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+}
+
+# ============================================
+# 4. SAÚDE LIVRE API - api.saudelivre.artesdosul.com
+# ============================================
+
+# HTTP - Redirecionar para HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name api.saudelivre.artesdosul.com;
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+
+    # Redirecionar para HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS - API Backend (Proxy Reverso)
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name api.saudelivre.artesdosul.com;
+
+    # Certificados SSL
+    ssl_certificate /etc/letsencrypt/live/api.saudelivre.artesdosul.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.saudelivre.artesdosul.com/privkey.pem;
+
+    # SSL Configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Headers de Segurança
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # Logs
+    access_log /var/log/nginx/saudelivre_api_access.log;
+    error_log /var/log/nginx/saudelivre_api_error.log;
+
+    # Upload máximo
+    client_max_body_size 50M;
+
+    # Proxy Reverso para API Backend (variável = resolve em tempo de requisição)
+    location / {
+        set $upstream_saudelivre_api "http://saude_livre_backend:3000";
+        proxy_pass $upstream_saudelivre_api;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;  # CRÍTICO: passar o Host correto
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_cache_bypass $http_upgrade;
+
+        # CORS - Passar headers do backend
+        proxy_pass_header Access-Control-Allow-Origin;
+        proxy_pass_header Access-Control-Allow-Methods;
+        proxy_pass_header Access-Control-Allow-Headers;
+        proxy_pass_header Access-Control-Allow-Credentials;
+        proxy_pass_header Access-Control-Expose-Headers;
+        
+        # Timeouts
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    # Let's Encrypt validation
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+}
+
+# ============================================
+# ZERO - zero.artesdosul.com
+# ============================================
+
+# HTTP - Redirecionar para HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name zero.artesdosul.com;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS - Zero App (Proxy Reverso)
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name zero.artesdosul.com;
+
+    ssl_certificate /etc/letsencrypt/live/zero.artesdosul.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/zero.artesdosul.com/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    access_log /var/log/nginx/zero_access.log;
+    error_log /var/log/nginx/zero_error.log;
+
+    client_max_body_size 50M;
+
+    location / {
+        set $upstream_zero "http://zero_app:3000";
+        proxy_pass $upstream_zero;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_cache_bypass $http_upgrade;
+
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+}
+
+# ============================================
+# ZERO API - api-zero.artesdosul.com
+# ============================================
+
+# HTTP - Redirecionar para HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name api-zero.artesdosul.com;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS - Zero Backend (Proxy Reverso)
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name api-zero.artesdosul.com;
+
+    ssl_certificate /etc/letsencrypt/live/api-zero.artesdosul.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api-zero.artesdosul.com/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubdomains" always;
+
+    access_log /var/log/nginx/zero_api_access.log;
+    error_log /var/log/nginx/zero_api_error.log;
+
+    client_max_body_size 50M;
+
+    location / {
+        set $upstream_api "http://zero_backend:8787";
+        proxy_pass $upstream_api$request_uri;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_cache_bypass $http_upgrade;
+
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+        allow all;
+    }
+}
+# configuration file /etc/nginx/fastcgi_params:
+
+fastcgi_param  QUERY_STRING       $query_string;
+fastcgi_param  REQUEST_METHOD     $request_method;
+fastcgi_param  CONTENT_TYPE       $content_type;
+fastcgi_param  CONTENT_LENGTH     $content_length;
+
+fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
+fastcgi_param  REQUEST_URI        $request_uri;
+fastcgi_param  DOCUMENT_URI       $document_uri;
+fastcgi_param  DOCUMENT_ROOT      $document_root;
+fastcgi_param  SERVER_PROTOCOL    $server_protocol;
+fastcgi_param  REQUEST_SCHEME     $scheme;
+fastcgi_param  HTTPS              $https if_not_empty;
+
+fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
+fastcgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
+
+fastcgi_param  REMOTE_ADDR        $remote_addr;
+fastcgi_param  REMOTE_PORT        $remote_port;
+fastcgi_param  SERVER_ADDR        $server_addr;
+fastcgi_param  SERVER_PORT        $server_port;
+fastcgi_param  SERVER_NAME        $server_name;
+
+# PHP only, required if PHP was built with --enable-force-cgi-redirect
+fastcgi_param  REDIRECT_STATUS    200;
+
+
+
+==========================================
+🔒 CERTIFICADOS SSL
+==========================================
+
+Certificados Let's Encrypt:
+--- api-zero.artesdosul.com ---
+  ✅ Certificado existe
+  Expira em: May 26 00:31:34 2026 GMT
+
+--- api.saudelivre.artesdosul.com ---
+  ✅ Certificado existe
+  Expira em: Mar 17 18:16:38 2026 GMT
+
+--- evolution.artesdosul.com ---
+  ✅ Certificado existe
+  Expira em: May  7 12:08:36 2026 GMT
+
+--- lorentz.orbitall.net.br ---
+  ✅ Certificado existe
+  Expira em: Feb 12 17:56:08 2026 GMT
+
+--- lotofacil.artesdosul.com ---
+  ✅ Certificado existe
+  Expira em: Feb  8 00:32:28 2026 GMT
+
+--- orcamento.artesdosul.com ---
+  ✅ Certificado existe
+  Expira em: Apr 29 20:19:21 2026 GMT
+
+--- saudelivre.artesdosul.com ---
+  ✅ Certificado existe
+  Expira em: Mar 17 18:16:17 2026 GMT
+
+--- zero.artesdosul.com ---
+  ✅ Certificado existe
+  Expira em: May 25 22:56:07 2026 GMT
+
+
+==========================================
+🔐 VARIÁVEIS DE AMBIENTE
+==========================================
+
+--- omnichannel_app (.env) ---
+APP_NAME=***
+APP_ENV=***
+APP_KEY=***
+APP_DEBUG=***
+APP_URL=***
+LOG_CHANNEL=***
+LOG_LEVEL=***
+DB_CONNECTION=***
+DB_HOST=***
+DB_PORT=***
+DB_DATABASE=***
+DB_USERNAME=***
+DB_ROOT_PASSWORD=***
+DB_PASSWORD=***
+BROADCAST_DRIVER=***
+CACHE_DRIVER=***
+FILESYSTEM_DISK=***
+QUEUE_CONNECTION=***
+SESSION_DRIVER=***
+SESSION_LIFETIME=***
+SESSION_SAME_SITE=***
+SESSION_SECURE_COOKIE=***
+REDIS_HOST=***
+REDIS_PASSWORD=***
+REDIS_PORT=***
+MAIL_MAILER=***
+MAIL_HOST=***
+MAIL_PORT=***
+MAIL_USERNAME=***
+MAIL_PASSWORD=***
+MAIL_ENCRYPTION=***
+MAIL_FROM_ADDRESS=***
+MAIL_FROM_NAME=***
+SANCTUM_STATEFUL_DOMAINS=***
+ASSET_URL=***
+
+
+==========================================
+📦 CONFIGURAÇÕES LARAVEL
+==========================================
+
+--- APP_KEY ---
+
+  app.key ................ base64:uJRFWiWjdz0n2L3z4h65SjERRO/5G6Wr7WFkIyJ8Ef4=  
+
+
+--- APP_URL ---
+
+  app.url .................................... https://lorentz.orbitall.net.br  
+
+
+--- Database Config ---
+  database.connections.mysql .................................................  
+  host .................................................................... db  
+  port .................................................................. 3306  
+  database ....................................................... omnichannel  
+
+
+==========================================
+🗄️ STATUS DO BANCO DE DADOS
+==========================================
+
+--- Migrações ---
+
+  Migration name .............................................. Batch / Status  
+  2025_11_13_185809_create_personal_access_tokens_table .............. [1] Ran  
+  2025_11_13_190516_fix_personal_access_tokens_index ................. [1] Ran  
+  2025_11_13_201849_create_companies_table ........................... [1] Ran  
+  2025_11_13_201905_create_users_table ............................... [1] Ran  
+  2025_11_13_201909_create_roles_table ............................... [1] Ran  
+  2025_11_13_201910_create_permissions_table ......................... [1] Ran  
+  2025_11_13_201911_create_role_permissions_table .................... [1] Ran  
+  2025_11_13_201913_create_license_types_table ....................... [1] Ran  
+  2025_11_13_201914_create_licenses_table ............................ [1] Ran  
+  2025_11_13_201915_create_modules_table ............................. [1] Ran  
+  2025_11_13_201916_create_license_modules_table ..................... [1] Ran  
+  2025_11_13_201919_create_contacts_table ............................ [1] Ran  
+  2025_11_13_201920_create_interactions_table ........................ [1] Ran  
+  2025_11_13_201922_create_agents_table .............................. [1] Ran  
+  2025_11_13_201923_create_queues_table .............................. [1] Ran  
+  2025_11_13_201925_create_pause_reasons_table ....................... [2] Ran  
+  2025_11_13_201926_create_agent_pauses_table ........................ [3] Ran  
+  2025_11_13_201927_create_qualifications_table ...................... [4] Ran  
+
+
+==========================================
+🔌 TESTES DE CONECTIVIDADE
+==========================================
+
+Testando conectividade entre containers...
+
+
+==========================================
+🔌 PORTAS EXPOSTAS
+==========================================
+
+NAMES                  PORTS
+zero_backend           0.0.0.0:8787->8787/tcp, [::]:8787->8787/tcp
+zero_app               0.0.0.0:3002->3000/tcp, [::]:3002->3000/tcp
+zero_valkey            0.0.0.0:6380->6379/tcp, [::]:6380->6379/tcp
+zero_upstash_proxy     0.0.0.0:8079->80/tcp, [::]:8079->80/tcp
+saude_livre_backend    0.0.0.0:3001->3000/tcp, [::]:3001->3000/tcp
+saude_livre_frontend   0.0.0.0:5174->80/tcp, [::]:5174->80/tcp
+evolution_frontend     0.0.0.0:3000->80/tcp, [::]:3000->80/tcp
+evolution_api          0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp
+orcamento_nginx        0.0.0.0:8080->80/tcp, [::]:8080->80/tcp, 0.0.0.0:8443->443/tcp, [::]:8443->443/tcp
+orcamento_app          9000/tcp
+orcamento_db           0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp
+orcamento_redis        0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
+n8n                    0.0.0.0:5678->5678/tcp, [::]:5678->5678/tcp
+community_app_1        0.0.0.0:5001->5001/tcp, [::]:5001->5001/tcp
+minio                  0.0.0.0:8760->9000/tcp, [::]:8760->9000/tcp, 0.0.0.0:8761->9090/tcp, [::]:8761->9090/tcp
+homarr                 0.0.0.0:7575->7575/tcp, [::]:7575->7575/tcp
+omnichannel_app        9000/tcp
+omnichannel_queue      9000/tcp
+omnichannel_redis      6379/tcp
+omnichannel_db         3306/tcp, 33060/tcp
+postgres               0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+orcamento_queue        9000/tcp
+lotofacil-neural-app   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
+portainer              0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp, 0.0.0.0:9443->9443/tcp, [::]:9443->9443/tcp, 9000/tcp
+
+
+==========================================
+📋 LOGS RECENTES (Últimas 10 linhas)
+==========================================
+
+--- omnichannel_app ---
+172.22.0.6 -  27/Jan/2026:07:42:33 +0000 "GET /index.php" 200
+172.22.0.6 -  27/Jan/2026:11:36:22 +0000 "GET /wp-login.php" 404
+172.22.0.6 -  27/Jan/2026:15:43:58 +0000 "GET /index.php" 200
+172.22.0.6 -  28/Jan/2026:06:16:43 +0000 "GET /index.php" 200
+[29-Jan-2026 03:57:17] NOTICE: Finishing ...
+[29-Jan-2026 03:57:17] NOTICE: exiting, bye-bye!
+[29-Jan-2026 04:39:35] NOTICE: fpm is running, pid 1
+[29-Jan-2026 04:39:35] NOTICE: ready to handle connections
+172.22.0.2 -  05/Feb/2026:23:15:09 +0000 "GET /index.php" 200
+172.22.0.2 -  06/Feb/2026:12:15:25 +0000 "GET /index.php" 200
+
+--- orcamento_nginx ---
+2026/03/11 20:54:15 [notice] 1#1: unknown process 547284 exited with code 0
+127.0.0.1 - - [11/Mar/2026:20:54:45 +0000] "GET /up HTTP/1.1" 301 169 "-" "Wget" "-"
+2026/03/11 20:54:45 [notice] 1#1: signal 17 (SIGCHLD) received from 547292
+2026/03/11 20:54:45 [notice] 1#1: unknown process 547292 exited with code 0
+127.0.0.1 - - [11/Mar/2026:20:55:15 +0000] "GET /up HTTP/1.1" 301 169 "-" "Wget" "-"
+2026/03/11 20:55:15 [notice] 1#1: signal 17 (SIGCHLD) received from 547300
+2026/03/11 20:55:15 [notice] 1#1: unknown process 547300 exited with code 0
+127.0.0.1 - - [11/Mar/2026:20:55:45 +0000] "GET /up HTTP/1.1" 301 169 "-" "Wget" "-"
+2026/03/11 20:55:45 [notice] 1#1: signal 17 (SIGCHLD) received from 547308
+2026/03/11 20:55:45 [notice] 1#1: unknown process 547308 exited with code 0
+
+
+==========================================
+📁 PERMISSÕES DE ARQUIVOS IMPORTANTES
+==========================================
+
+--- Storage e Cache ---
+total 6040
+drwxrwxr-x 2 www-data www-data    4096 Nov 14 19:08 .
+drwxrwxr-x 5 www-data www-data    4096 Nov 14 17:54 ..
+-rwxrwxr-x 1 www-data www-data      14 Nov 14 17:54 .gitignore
+-rwxrwxr-x 1 www-data www-data 6166663 Jan 29 04:40 laravel.log
+
+
+==========================================
+🩺 ANÁLISE DE SAÚDE DOS CONTAINERS
+==========================================
+
+--- Containers Saudáveis (healthcheck OK) ---
+  zero_app	Up 13 days (healthy)
+  zero_valkey	Up 2 weeks (healthy)
+  zero_upstash_proxy	Up 2 weeks (healthy)
+  orcamento_nginx	Up 3 weeks (healthy)
+  orcamento_app	Up 3 weeks (healthy)
+  lotofacil-neural-app	Up 5 weeks (healthy)
+
+--- Containers Rodando (sem healthcheck) ---
+  zero_backend	Up 13 days
+  saude_livre_backend	Up 3 weeks
+  saude_livre_frontend	Up 3 weeks
+  evolution_frontend	Up 4 weeks
+  evolution_api	Up 4 weeks
+  orcamento_db	Up 5 weeks
+  orcamento_redis	Up 5 weeks
+  n8n	Up 5 weeks
+  community_app_1	Up 5 weeks
+  minio	Up 5 weeks
+  homarr	Up 5 weeks
+  omnichannel_app	Up 5 weeks
+  omnichannel_queue	Up 43 minutes
+  omnichannel_redis	Up 5 weeks
+  omnichannel_db	Up 5 weeks
+  postgres	Up 5 weeks
+  orcamento_queue	Up 5 weeks
+  portainer	Up 5 weeks
+
+--- Containers com Problema (exited com erro) ---
+  Nenhum
+
+--- Containers Parados (exited 0 - esperado) ---
+  zero_migrations	Exited (0) 13 days ago
+  moltbot-moltbot-gateway-1	Exited (0) 5 weeks ago
+  dozzle-dozzle-1	Exited (0) 5 weeks ago
+  networking-toolbox	Exited (0) 5 weeks ago
+  omnichannel_nginx	Exited (0) 4 weeks ago
+
+--- Resumo Quantitativo ---
+  Total de containers: 29
+  Rodando: 24
+  Com healthcheck OK: 6
+  Com erro (exited != 0): 0
+
+
+==========================================
+💚 RESUMO DE SAÚDE
+==========================================
+
+Containers rodando:
+  Total: 24
+  Omnichannel: 4
+
+✅ Documentação gerada em: infra-documentacao-20260311_205608.txt
+📊 Tamanho do arquivo: 48K
+
+🔍 Para visualizar: cat infra-documentacao-20260311_205608.txt | less

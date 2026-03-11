@@ -1,7 +1,31 @@
-function BookCard({ book, completed, onToggle }) {
+import { useState } from 'react';
+
+function BookCard({ book, completed, onToggle, onPdfError }) {
   const priorityClass = `priority-${book.priority?.toLowerCase() || 'p3'}`;
   const tags = book.tags || [book.category];
   const topic = book.topic || book.category;
+  const [loading, setLoading] = useState(false);
+
+  const handleOpenPdf = async (e) => {
+    e.preventDefault();
+    if (!book.url || loading) return;
+    setLoading(true);
+    try {
+      const res = await fetch(book.url);
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Erro ${res.status} ao carregar PDF`);
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener');
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      onPdfError?.(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <article className={`book-card ${completed ? 'completed' : ''}`} title={book.motivo || undefined}>
@@ -23,12 +47,14 @@ function BookCard({ book, completed, onToggle }) {
         {book.url && (
           <a
             href={book.url}
+            onClick={handleOpenPdf}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-link"
+            className={`btn btn-link ${loading ? 'loading' : ''}`}
             aria-label="Abrir livro"
+            aria-busy={loading}
           >
-            📖 Abrir
+            {loading ? '⏳ Carregando...' : '📖 Abrir'}
           </a>
         )}
         <button

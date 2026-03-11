@@ -95,6 +95,12 @@ async function getDb() {
     const sqlite = new Database(dbPath);
     sqlite.pragma('journal_mode = WAL');
     sqlite.exec(SCHEMA);
+    try {
+      sqlite.exec('ALTER TABLE users ADD COLUMN google_id TEXT');
+      sqlite.exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_google_id ON users(google_id) WHERE google_id IS NOT NULL');
+    } catch (e) {
+      if (!e.message?.includes('duplicate column') && !e.message?.includes('already exists')) throw e;
+    }
 
     _db = {
       async run(sql, ...args) {
@@ -206,6 +212,12 @@ async function initSchemaTurso(db) {
     } catch (e) {
       if (!e.message?.includes('already exists')) throw e;
     }
+  }
+  try {
+    await db.run('ALTER TABLE users ADD COLUMN google_id TEXT');
+    await db.run('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_google_id ON users(google_id) WHERE google_id IS NOT NULL');
+  } catch (e) {
+    if (!e.message?.includes('duplicate column') && !e.message?.includes('already exists')) throw e;
   }
 }
 

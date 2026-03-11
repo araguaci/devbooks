@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
 import { readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -67,6 +68,7 @@ function enrichBook(book) {
 
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 
 app.use(cors({ origin: true }));
 app.use(express.json());
@@ -135,11 +137,53 @@ app.post('/api/auth/login', async (req, res) => {
   const user = await req.db.get('SELECT id, email, password_hash, display_name FROM users WHERE email = ?',
     email.toLowerCase().trim());
   if (!user) return res.status(401).json({ error: 'Credenciais inválidas' });
+  if (user.google_id) return res.status(401).json({ error: 'Use o login com Google para esta conta' });
   const ok = await bcrypt.compare(password, user.password_hash);
   if (!ok) return res.status(401).json({ error: 'Credenciais inválidas' });
   delete user.password_hash;
   const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '7d' });
   res.json({ user, token });
+});
+
+app.post('/api/auth/google', async (req, res) => {
+  const { credential } = req.body;
+  if (!credential) return res.status(400).json({ error: 'Token Google ausente' });
+  if (!GOOGLE_CLIENT_ID) return res.status(503).json({ error: 'Login com Google não configurado' });
+
+  try {
+    const client = new OAuth2Client(GOOGLE_CLIENT_ID);
+    const ticket = await client.verifyIdToken({ idToken: credential, audience: GOOGLE_CLIENT_ID });
+    const payload = ticket.getPayload();
+    const { email, name, sub: googleId } = payload;
+    if (!email) return res.status(400).json({ error: 'Email não fornecido pelo Google' });
+
+    const emailLower = email.toLowerCase().trim();
+    let user = await req.db.get(
+      'SELECT id, email, display_name, created_at, google_id FROM users WHERE google_id = ? OR email = ?',
+      googleId, emailLower
+    );
+
+    if (!user) {
+      const placeholderHash = await bcrypt.hash('google_oauth_' + googleId, 10);
+      const result = await req.db.get(
+        'INSERT INTO users (email, password_hash, display_name, google_id) VALUES (?, ?, ?, ?) RETURNING id, email, display_name, created_at',
+        emailLower, placeholderHash, (name || '').trim() || null, googleId
+      );
+      user = result;
+      await req.db.run('INSERT OR IGNORE INTO user_stats (user_id) VALUES (?)', user.id);
+    } else if (!user.google_id) {
+      await req.db.run('UPDATE users SET google_id = ? WHERE id = ?', googleId, user.id);
+    }
+
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '7d' });
+    res.json({
+      user: { id: user.id, email: user.email, display_name: user.display_name, created_at: user.created_at },
+      token,
+    });
+  } catch (e) {
+    console.error('[Google Auth]', e.message);
+    res.status(401).json({ error: 'Token Google inválido' });
+  }
 });
 
 app.get('/api/me', authMiddleware, async (req, res) => {
@@ -153,12 +197,22 @@ app.get('/api/pdf/:slug', async (req, res) => {
   const rawUrl = getRawUrl(slug, getLinks());
   if (!rawUrl) return res.status(404).json({ error: 'Livro não encontrado' });
   try {
-    const resp = await fetch(rawUrl);
-    if (!resp.ok) return res.status(502).json({ error: 'Erro ao buscar PDF' });
+    const resp = await fetch(rawUrl, {
+      headers: {
+        'User-Agent': 'DevBooks/1.0 (https://devbooks.artesdosul.com)',
+        'Accept': 'application/pdf,application/octet-stream,*/*',
+      },
+      signal: AbortSignal.timeout(30000),
+    });
+    if (!resp.ok) {
+      console.error('[PDF] fetch failed:', resp.status, rawUrl);
+      return res.status(502).json({ error: 'Erro ao buscar PDF' });
+    }
     const buffer = Buffer.from(await resp.arrayBuffer());
     res.set({ 'Content-Type': 'application/pdf', 'Content-Disposition': 'inline' });
     res.send(buffer);
   } catch (e) {
+    console.error('[PDF]', slug, e.message);
     res.status(502).json({ error: 'Erro ao buscar PDF' });
   }
 });

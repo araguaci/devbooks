@@ -1,0 +1,34 @@
+# DevBooks - Deploy em devbooks.artesdosul.com
+# Porta 3003 no host (3000, 3001, 3002 já em uso por evolution, saude_livre, zero)
+
+services:
+  devbooks_app:
+    build:
+      context: .
+      args:
+        VITE_GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID:-}
+    container_name: devbooks_app
+    restart: unless-stopped
+    ports:
+      - "3003:3001"
+    environment:
+      - PORT=3001
+      - JWT_SECRET=${JWT_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-}
+      - GITHUB_RAW_BASE=${GITHUB_RAW_BASE:-}
+      # SQLite local (volume)
+      - DATABASE_PATH=/data/biblioteca.db
+      # Turso (descomente no .env e aqui para usar)
+      # - TURSO_DATABASE_URL=${TURSO_DATABASE_URL}
+      # - TURSO_AUTH_TOKEN=${TURSO_AUTH_TOKEN}
+    volumes:
+      - devbooks_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  devbooks_data:

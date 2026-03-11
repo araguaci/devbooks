@@ -1,0 +1,40 @@
+# Dependencies (instaladas no build)
+node_modules
+**/node_modules
+
+# Build outputs (será gerado no build)
+client/dist
+dist
+dist-ssr
+build
+
+# Git
+.git
+.gitignore
+
+# Environment (não copiar secrets)
+.env
+.env.*
+!.env.example
+
+# Documentação e arquivos de desenvolvimento
+*.md
+!README.md
+docs
+.history
+.vscode
+.idea
+.DS_Store
+
+# Netlify / Vercel
+.netlify
+.vercel
+
+# Logs e caches
+*.log
+logs
+.npm
+.cache
+
+# Livros/PDFs (reduz contexto de build)
+LivrosDev*

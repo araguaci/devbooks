@@ -252,6 +252,7 @@ export default function Dashboard() {
               book={book}
               completed={completedIds.has(book.id)}
               onToggle={() => handleToggle(book.id)}
+              onPdfError={setError}
             />
           ))}
         </div>
