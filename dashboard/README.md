@@ -1,6 +1,6 @@
-# BibliotecaDev Dashboard
+# DevBooks Dashboard
 
-Dashboard gamificado para acompanhar progresso de leitura da BibliotecaDev.
+Dashboard gamificado para acompanhar progresso de leitura do DevBooks.
 
 ## Stack
 

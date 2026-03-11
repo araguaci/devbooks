@@ -1,4 +1,4 @@
-# BibliotecaDev Dashboard (Frontend)
+# DevBooks Dashboard (Frontend)
 
 Interface React com estética Cyber-Growth para o dashboard gamificado.
 

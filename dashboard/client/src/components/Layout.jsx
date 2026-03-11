@@ -15,7 +15,7 @@ export default function Layout({ children }) {
       <header className="header">
         <Link to="/" className="logo">
           <span className="logo-icon">📚</span>
-          <span>BibliotecaDev</span>
+          <span>DevBooks</span>
         </Link>
         <nav className="nav">
           <span className="user-email">{user?.display_name || user?.email}</span>

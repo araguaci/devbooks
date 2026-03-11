@@ -31,7 +31,7 @@ export default function Register() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>BibliotecaDev</h1>
+          <h1>DevBooks</h1>
           <p>Crie sua conta e comece a evoluir</p>
         </div>
         <form onSubmit={handleSubmit} className="auth-form">

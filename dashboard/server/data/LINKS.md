@@ -5,7 +5,7 @@
 Configure a variável `GITHUB_RAW_BASE` no `.env`:
 
 ```
-GITHUB_RAW_BASE=https://raw.githubusercontent.com/SEU_USER/BibliotecaDev/main
+GITHUB_RAW_BASE=https://raw.githubusercontent.com/araguaci/devbooks/main
 ```
 
 Todos os 95+ livros terão link automático para `LivrosDev/{slug}.pdf` — sem editar nada manualmente.

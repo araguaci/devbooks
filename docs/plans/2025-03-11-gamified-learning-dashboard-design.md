@@ -1,4 +1,4 @@
-# Design: Dashboard Gamificado para BibliotecaDev
+# Design: Dashboard Gamificado para DevBooks
 
 **Data:** 2025-03-11  
 **Status:** Aprovado  
@@ -8,10 +8,10 @@
 
 ## 1. Visão Geral
 
-Dashboard web gamificado para acompanhar progresso de leitura da BibliotecaDev. Multi-usuário com login, persistência em banco, XP, níveis, streaks, badges, leaderboard, conquistas especiais, desafios semanais e notificações de streak.
+Dashboard web gamificado para acompanhar progresso de leitura do DevBooks. Multi-usuário com login, persistência em banco, XP, níveis, streaks, badges, leaderboard, conquistas especiais, desafios semanais e notificações de streak.
 
 ### Requisitos validados
-- **Conteúdo:** Livros da BibliotecaDev (LivrosDev + RANKING)
+- **Conteúdo:** Livros do DevBooks (LivrosDev + RANKING)
 - **Usuários:** Multi-usuário com cadastro/login
 - **Gamificação:** Completa + (XP, níveis, streaks, badges, leaderboard, conquistas, desafios semanais, notificações)
 

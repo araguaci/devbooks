@@ -1,4 +1,4 @@
-# API BibliotecaDev Dashboard
+# API DevBooks Dashboard
 
 Backend Node.js + Express + SQLite para o dashboard gamificado.
 

@@ -30,7 +30,7 @@ export default function Login() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>BibliotecaDev</h1>
+          <h1>DevBooks</h1>
           <p>Entre para acompanhar sua jornada de leitura</p>
         </div>
         <form onSubmit={handleSubmit} className="auth-form">
