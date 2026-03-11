@@ -32,7 +32,9 @@ Acesse http://localhost:5173. O frontend faz proxy de `/api` para o backend (por
 
 ## Deploy
 
-**Netlify (atual):** [docs/NETLIFY.md](docs/NETLIFY.md)
+**Convencional (Railway, Render, VPS):** [docs/DEPLOY-CONVENCIONAL.md](docs/DEPLOY-CONVENCIONAL.md) — sem serverless, Node roda como processo normal.
+
+**Netlify (serverless):** [docs/NETLIFY.md](docs/NETLIFY.md)
 
 **Vercel (legado):** [docs/VERCEL-SETUP.md](docs/VERCEL-SETUP.md) para:
 - Excluir projeto e criar novamente

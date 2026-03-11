@@ -2,10 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getDb } from './db.js';
+
+const isServerless = !!(process.env.VERCEL || process.env.NETLIFY);
 
 function getDataDir() {
   try {
@@ -326,9 +328,24 @@ app.get('/api/challenges/current', authMiddleware, async (req, res) => {
   res.json({ ...challenge, books_completed: updated.books_completed, completed: done });
 });
 
+// Deploy convencional: servir SPA + fallback
+if (!isServerless) {
+  const distPath = join(process.cwd(), 'client', 'dist');
+  if (existsSync(distPath)) {
+    app.use(express.static(distPath));
+    app.get('*', (req, res) => {
+      if (!req.path.startsWith('/api')) {
+        res.sendFile(join(distPath, 'index.html'));
+      } else {
+        res.status(404).json({ error: 'Not found' });
+      }
+    });
+  }
+}
+
 const PORT = process.env.PORT || 3001;
-if (!process.env.VERCEL) {
-  app.listen(PORT, () => console.log(`API rodando em http://localhost:${PORT}`));
+if (!isServerless) {
+  app.listen(PORT, () => console.log(`DevBooks rodando em http://localhost:${PORT}`));
 }
 
 export default app;
