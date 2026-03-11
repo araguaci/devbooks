@@ -30,6 +30,11 @@ Acesse http://localhost:5173. O frontend faz proxy de `/api` para o backend (por
 
 ## Deploy (Vercel)
 
+Ver [docs/VERCEL-SETUP.md](docs/VERCEL-SETUP.md) para:
+- Excluir projeto e criar novamente
+- **Build Command**, **Output Directory**, **Install Command**
+- Variáveis de ambiente
+
 ```bash
 npm run deploy
 ```

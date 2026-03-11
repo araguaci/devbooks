@@ -1,0 +1,13 @@
+# Pastas grandes — não enviar para Vercel (evita timeout/limite)
+LivrosDev/
+LivrosDev - Kindle/
+.history/
+
+# Node modules — instalados no build
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Banco local
+*.db
+*.sqlite
