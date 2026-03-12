@@ -29,10 +29,12 @@ export default function Dashboard() {
   const [legend, setLegend] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const load = async () => {
     setLoading(true);
     setError('');
+    setSuccess('');
     try {
       const [booksRes, progressRes, statsRes, leaderRes, challengeRes, legendRes] = await Promise.all([
         getBooks(),
@@ -99,8 +101,10 @@ export default function Dashboard() {
 
   const handleToggle = async (bookId) => {
     try {
-      await toggleProgress(bookId);
+      const result = await toggleProgress(bookId);
       await load();
+      setSuccess(result?.completed ? 'Livro marcado como lido!' : 'Livro desmarcado.');
+      setTimeout(() => setSuccess(''), 4000);
     } catch (err) {
       setError(err.message);
     }
@@ -121,6 +125,12 @@ export default function Dashboard() {
         <div className="toast toast-error" role="alert">
           {error}
           <button type="button" onClick={() => setError('')} aria-label="Fechar">×</button>
+        </div>
+      )}
+      {success && (
+        <div className="toast toast-success" role="status">
+          {success}
+          <button type="button" onClick={() => setSuccess('')} aria-label="Fechar">×</button>
         </div>
       )}
 

@@ -6,7 +6,8 @@
     "start": "node index.js",
     "dev": "node --watch index.js",
     "seed": "node scripts/seed.js",
-    "generate-links": "node scripts/generate-links.js"
+    "generate-links": "node scripts/generate-links.js",
+    "validate-links": "node scripts/validate-links.js"
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",

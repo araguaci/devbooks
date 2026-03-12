@@ -28,7 +28,11 @@ export default function Layout({ children }) {
         {children || <Outlet />}
       </main>
       <footer className="footer">
-        <span>Desenvolvido por <a href="https://artesdosul.com/" target="_blank" rel="noopener noreferrer">@artesdosul</a></span>
+        <span>
+          <a href="https://github.com/araguaci/devbooks/issues/new?template=sugestao-livro.md" target="_blank" rel="noopener noreferrer">Sugerir livro</a>
+          {' · '}
+          Desenvolvido por <a href="https://artesdosul.com/" target="_blank" rel="noopener noreferrer">@artesdosul</a>
+        </span>
       </footer>
     </div>
   );

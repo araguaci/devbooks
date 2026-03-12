@@ -111,6 +111,10 @@ export default function Landing() {
 
       <footer className="landing-footer">
         <p>
+          <a href="https://github.com/araguaci/devbooks/issues/new?template=sugestao-livro.md" target="_blank" rel="noopener noreferrer">
+            Sugerir livro
+          </a>
+          {' · '}
           Desenvolvido por{' '}
           <a href="https://artesdosul.com/" target="_blank" rel="noopener noreferrer">
             @artesdosul

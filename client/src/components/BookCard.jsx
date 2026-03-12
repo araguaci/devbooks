@@ -6,16 +6,22 @@ function BookCard({ book, completed, onToggle, onPdfError }) {
   const topic = book.topic || book.category;
   const [loading, setLoading] = useState(false);
 
+  const fetchWithRetry = async (url, retries = 2) => {
+    for (let i = 0; i <= retries; i++) {
+      const res = await fetch(url);
+      if (res.ok) return res;
+      if (i < retries) await new Promise((r) => setTimeout(r, 1000 * (i + 1)));
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || `Erro ${res.status} ao carregar PDF`);
+    }
+  };
+
   const handleOpenPdf = async (e) => {
     e.preventDefault();
     if (!book.url || loading) return;
     setLoading(true);
     try {
-      const res = await fetch(book.url);
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || `Erro ${res.status} ao carregar PDF`);
-      }
+      const res = await fetchWithRetry(book.url);
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       window.open(url, '_blank', 'noopener');

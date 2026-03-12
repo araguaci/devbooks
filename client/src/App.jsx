@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
+import NotFound from './pages/NotFound';
 import Layout from './components/Layout';
 
 function ProtectedRoute({ children }) {
@@ -38,7 +39,7 @@ function AppRoutes() {
           )
         }
       />
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
